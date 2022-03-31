@@ -188,6 +188,7 @@ tr {
 
 .tr-content {
   width: 29vw;
+  height: 4vh;
   overflow-y: hidden;
   overflow-x: scroll;
 }
