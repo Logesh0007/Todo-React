@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to right, #6441a5, #2a0845);
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.msg-pop-up {
+  width: 400px;
+  height: 70px;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  top: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(400px);
+  animation-name: slide;
+  animation-duration: 5s;
+}
+
+@keyframes slide {
+  0% {
+    transform: translate(400px);
+  }
+  5% {
+    transform: translate(-60px);
+  }
+  80% {
+    transform: translate(-40px);
+  }
+  100% {
+    transform: translate(400px);
+  }
+}
+
+.msg-content {
+  font-size: 23px;
+  color: #2a0845;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  color: white;
+  text-transform: uppercase;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  margin: 3vh 0;
+  cursor: default;
+}
+
+.container {
+  width: 60vw;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+
+.ip-field {
+  width: 48vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ip-todo {
+  width: 40vw;
+  height: 8vh;
+  margin-left: 1vw;
+  font-size: 20px;
+  padding: 0 2vw;
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  caret-color: #4f2d83;
+  color: #4f2d83;
+  font-weight: bold;
+}
+
+.ip-todo:hover {
+  box-shadow: 0 0 5px 3px rgb(130, 67, 224);
+  transition: all 300ms;
+}
+
+.ip-todo::placeholder {
+  color: rgba(79, 45, 131, 0.4);
+}
+
+.ip-todo:focus {
+  outline: none;
+}
+
+.add-btn-field {
+  width: 8vh;
+  height: 8vh;
+  margin-right: 2vw;
+  border: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.add-btn-field svg {
+  width: calc(100vw / 55);
+  height: calc(100vw / 55);
+}
+
+.add-btn-field:hover {
+  box-shadow: 0 0 5px 3px rgb(130, 67, 224);
+  transition: all 300ms;
+}
+
+.add-btn-field:active svg {
+  width: calc(100vw / 60);
+  height: calc(100vw / 60);
+  transition: transform 1000ms ease-in;
+}
+
+.list-field {
+  width: 35vw;
+  height: 60vh;
+  margin: 10vh 0 0 5vw;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.list-field::-webkit-scrollbar {
+  width: 7px;
+}
+
+.list-field::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 50px;
+}
+
+.list-field .list {
+  width: 30vw;
+  height: 45vh;
+}
+
+table {
+  width: 30vw;
+}
+
+tbody {
+  width: 30vw;
+  background: linear-gradient(to right, #502e84, #3e1c66);
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30vw;
+  height: 7vh;
+  background-color: white;
+  padding-left: 1vh;
+  margin-bottom: 1vh;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4f2d83;
+  border-radius: 10px;
+  cursor: default;
+  overflow: hidden;
+}
+
+.tr-content {
+  width: 29vw;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.tr-content::-webkit-scrollbar {
+  display: none;
+}
+
+.row-task:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px 5px rgb(44, 11, 94);
+  transition: transform 300ms;
+}
+
+.opt-cont {
+  display: flex;
+  justify-content: flex-end;
+  width: 70px;
+}
+
+tr:hover .opt-cont {
+  display: flex;
+  transition: all 300ms;
+}
+
+.del {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  fill: red;
+  cursor: pointer;
+}
+
+.del:hover {
+  transform: scale(1.1);
+  transition: transform 200ms;
+}
+
+.del:active {
+  transform: scale(0.9);
+  transition: transform 100ms;
+}
