@@ -35,12 +35,15 @@ body {
   0% {
     transform: translate(400px);
   }
+
   5% {
     transform: translate(-60px);
   }
+
   80% {
     transform: translate(-40px);
   }
+
   100% {
     transform: translate(400px);
   }
@@ -93,11 +96,11 @@ body {
   caret-color: #4f2d83;
   color: #4f2d83;
   font-weight: bold;
+  transition: all 300ms;
 }
 
 .ip-todo:hover {
   box-shadow: 0 0 5px 3px rgb(130, 67, 224);
-  transition: all 300ms;
 }
 
 .ip-todo::placeholder {
@@ -116,6 +119,7 @@ body {
   background-color: white;
   display: flex;
   justify-content: center;
+  transition: all 300ms;
   align-items: center;
   border-radius: 10px;
 }
@@ -127,7 +131,6 @@ body {
 
 .add-btn-field:hover {
   box-shadow: 0 0 5px 3px rgb(130, 67, 224);
-  transition: all 300ms;
 }
 
 .add-btn-field:active svg {
@@ -187,10 +190,11 @@ tr {
 }
 
 .tr-content {
-  width: 29vw;
-  overflow-y: hidden;
+  width: 27vw;
+  height: 4vh;
   overflow-x: scroll;
 }
+
 .tr-content::-webkit-scrollbar {
   display: none;
 }
@@ -218,6 +222,7 @@ tr:hover .opt-cont {
   margin-right: 10px;
   fill: red;
   cursor: pointer;
+  background-color: white;
 }
 
 .del:hover {
