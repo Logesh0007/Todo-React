@@ -227,9 +227,29 @@ tr:hover .opt-cont {
   stroke: rgb(0, 223, 0);
 }
 
+.complete:hover {
+  transform: scale(1.1);
+  transition: transform 200ms;
+}
+
+.complete:active {
+  transform: scale(0.9);
+  transition: transform 100ms;
+}
+
 .uncomplete {
   width: 25px;
   transition: all 0.2s;
+}
+
+.uncomplete:hover {
+  transform: scale(1.1);
+  transition: transform 200ms;
+}
+
+.uncomplete:active {
+  transform: scale(0.9);
+  transition: transform 100ms;
 }
 
 .del {
