@@ -207,8 +207,10 @@ tr {
 
 .opt-cont {
   display: flex;
-  justify-content: flex-end;
-  width: 70px;
+  justify-content: space-around;
+  align-items: center;
+  width: 80px;
+  height: 90%;
 }
 
 tr:hover .opt-cont {
@@ -216,10 +218,23 @@ tr:hover .opt-cont {
   transition: all 300ms;
 }
 
+.complete {
+  width: 25px;
+  transition: all 0.2s;
+}
+
+.complete path {
+  stroke: rgb(0, 223, 0);
+}
+
+.uncomplete {
+  width: 25px;
+  transition: all 0.2s;
+}
+
 .del {
   width: 20px;
   height: 20px;
-  margin-right: 10px;
   fill: red;
   cursor: pointer;
   background-color: white;

@@ -1,19 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Todo({ task, del }) {
-  const [delClick, setDelClick] = useState(false);
-
-  const delFunc = (e) => {
-    del(e.target.parentElement.parentElement.previousElementSibling.innerHTML);
-    setDelClick(true);
+function Todo({ task, del, updateTaskTrue, updateTaskFalse }) {
+  const delFunc = () => {
+    del(task.id);
   };
 
   return (
-    <tr className="row-task" style={{ transition: "all 300ms" }}>
-      <div className="tr-content" id="task-list">
-        {task}
+    <tr
+      className="row-task"
+      style={{
+        transition: "all 300ms",
+        textDecoration: task.data.completed ? "line-through" : "",
+      }}
+    >
+      <div
+        className="tr-content"
+        id="task-list"
+        style={{ opacity: task.data.completed ? "0.5" : "1" }}
+      >
+        {task.data.detail}
       </div>
       <div className="opt-cont">
+        {task.data.completed ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="uncomplete"
+            viewBox="0 0 512 512"
+            fill={task.data.completed ? "rgb(0,255,0)" : "white"}
+            style={{
+              backgroundColor: task.data.completed ? "white" : "rgb(0,255,0)",
+            }}
+            onClick={() => {
+              updateTaskFalse(task.id);
+            }}
+          >
+            <title>Uncomplete</title>
+            <path d="M400 48H112a64.07 64.07 0 00-64 64v288a64.07 64.07 0 0064 64h288a64.07 64.07 0 0064-64V112a64.07 64.07 0 00-64-64zm-35.75 138.29l-134.4 160a16 16 0 01-12 5.71h-.27a16 16 0 01-11.89-5.3l-57.6-64a16 16 0 1123.78-21.4l45.29 50.32 122.59-145.91a16 16 0 0124.5 20.58z" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="complete"
+            viewBox="0 0 512 512"
+            onClick={() => {
+              updateTaskTrue(task.id);
+            }}
+          >
+            <title>Complete</title>
+            <path
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="32"
+              d="M416 128L192 384l-96-96"
+            />
+          </svg>
+        )}
+
         <svg
           onClick={delFunc}
           className="del"

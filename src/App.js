@@ -1,30 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc,
+  onSnapshot,
+} from "firebase/firestore";
 import "./App.css";
 import Todo from "./Todo";
+import db, { colRef } from "./firebase";
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [todo, setTodo] = useState("");
 
-  function updTask(tasks) {
-    let newTask = tasks;
-    setTasks([...newTask]);
-  }
-  const delTask = (taskName) => {
-    tasks.splice(tasks.indexOf(taskName), 1);
-    updTask(tasks);
+  useEffect(() => {
+    onSnapshot(colRef, (snapshot) => {
+      setTasks(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
+    });
+  }, []);
+
+  const updateTaskTrue = (taskId) => {
+    const updVal = doc(db, "tasks", taskId);
+
+    updateDoc(updVal, { completed: true })
+      .then(() => console.log("done"))
+      .catch((err) => console.log(err.message));
+  };
+
+  const updateTaskFalse = (taskId) => {
+    const updVal = doc(db, "tasks", taskId);
+
+    updateDoc(updVal, { completed: false })
+      .then(() => console.log("done"))
+      .catch((err) => console.log(err.message));
+  };
+
+  const delTask = async (taskId) => {
+    await deleteDoc(doc(db, "tasks", taskId))
+      .then(() => console.log("Task deleted successfully"))
+      .catch((err) => console.log("error", err.message));
   };
 
   function addTodo(e) {
     e.preventDefault();
-    setTasks([...tasks, todo]);
+    addDoc(colRef, { detail: todo });
     setTodo("");
   }
 
   return (
     <>
       <h1 className="title" id="title">
-        to do app
+        to do list
       </h1>
       <form className="ip-field" autoComplete="off">
         <input
@@ -33,7 +60,7 @@ function App() {
           id="ip-todo"
           style={{ transition: "all 300ms" }}
           value={todo}
-          placeholder="write something"
+          placeholder="Type your task ..."
           onChange={(e) => setTodo(e.target.value)}
         />
         <button
@@ -58,7 +85,12 @@ function App() {
               {tasks.map((task) => {
                 return (
                   <>
-                    <Todo task={task} del={delTask} />
+                    <Todo
+                      task={task}
+                      del={delTask}
+                      updateTaskFalse={updateTaskFalse}
+                      updateTaskTrue={updateTaskTrue}
+                    />
                   </>
                 );
               })}
