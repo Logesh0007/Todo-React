@@ -5,6 +5,8 @@ function Todo({ task, del, updateTaskTrue, updateTaskFalse }) {
     del(task.id);
   };
 
+  console.log(task);
+
   return (
     <tr
       className="row-task"

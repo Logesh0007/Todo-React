@@ -76,7 +76,7 @@ body {
 }
 
 .ip-field {
-  width: 48vw;
+  width: 50vw;
   height: 10vh;
   display: flex;
   flex-direction: row;
@@ -87,7 +87,6 @@ body {
 .ip-todo {
   width: 40vw;
   height: 8vh;
-  margin-left: 1vw;
   font-size: 20px;
   padding: 0 2vw;
   border-radius: 10px;
@@ -114,7 +113,6 @@ body {
 .add-btn-field {
   width: 8vh;
   height: 8vh;
-  margin-right: 2vw;
   border: none;
   background-color: white;
   display: flex;
@@ -134,6 +132,34 @@ body {
 }
 
 .add-btn-field:active svg {
+  width: calc(100vw / 60);
+  height: calc(100vw / 60);
+  transition: transform 1000ms ease-in;
+}
+
+.svg {
+  width: 8vh;
+  height: 8vh;
+  border: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  transition: all 300ms;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.svg svg {
+  width: calc(100vw / 55);
+  height: calc(100vw / 55);
+}
+
+.svg:hover {
+  box-shadow: 0 0 5px 3px rgb(130, 67, 224);
+}
+
+.svg:active svg {
   width: calc(100vw / 60);
   height: calc(100vw / 60);
   transition: transform 1000ms ease-in;
@@ -220,6 +246,7 @@ tr:hover .opt-cont {
 
 .complete {
   width: 25px;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
@@ -239,6 +266,7 @@ tr:hover .opt-cont {
 
 .uncomplete {
   width: 25px;
+  cursor: pointer;
   transition: all 0.2s;
 }
 
