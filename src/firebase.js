@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBpllDaQ0Erh6KzmRqmsvzQMZId-OGv_fk",
+  apiKey: process.env.FIREBASE_KEY,
   authDomain: "todo-a288c.firebaseapp.com",
   projectId: "todo-a288c",
   storageBucket: "todo-a288c.appspot.com",
