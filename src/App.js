@@ -7,6 +7,7 @@ import {
   onSnapshot,
   query,
   orderBy,
+  where,
 } from "firebase/firestore";
 import "./App.css";
 import Todo from "./Todo";
@@ -15,13 +16,38 @@ import db, { colRef } from "./firebase";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [todo, setTodo] = useState("");
+  const [sort, setSort] = useState("");
+  const [sortBox, setSortBox] = useState(false);
 
   useEffect(() => {
-    const sorted = query(colRef, orderBy("createdAt", "desc"));
-    onSnapshot(sorted, (snapshot) => {
-      setTasks(snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id })));
-    });
-  }, []);
+    if (sort === "all" || sort === "") {
+      onSnapshot(colRef, (snapshot) => {
+        setTasks(
+          snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+        );
+      });
+    }
+
+    if (sort === "completed") {
+      const sorted = query(colRef, where("completed", "==", true));
+      onSnapshot(sorted, (snapshot) => {
+        setTasks(
+          snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+        );
+      });
+    }
+
+    if (sort === "uncompleted") {
+      const sorted = query(colRef, where("completed", "==", false));
+      onSnapshot(sorted, (snapshot) => {
+        setTasks(
+          snapshot.docs.map((doc) => ({ data: doc.data(), id: doc.id }))
+        );
+      });
+    }
+  }, [sortBox]);
+
+  // console.log(tasks);
 
   const updateTaskTrue = (taskId) => {
     const updVal = doc(db, "tasks", taskId);
@@ -47,7 +73,7 @@ function App() {
 
   function addTodo(e) {
     e.preventDefault();
-    addDoc(colRef, { detail: todo });
+    addDoc(colRef, { detail: todo, completed: false });
     setTodo("");
   }
 
@@ -81,29 +107,68 @@ function App() {
           </svg>
         </button>
 
-        <div className="svg" style={{ transition: "all 300ms" }} title="SortBy">
+        <div
+          className="svg"
+          style={{ transition: "all 300ms" }}
+          title="SortBy"
+          onClick={() => setSortBox(!sortBox)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="ionicon"
+            className="ionicon"
             viewBox="0 0 512 512"
             fill="#38165D"
           >
             <path d="M296 464a23.88 23.88 0 01-7.55-1.23L208.3 436.1a23.92 23.92 0 01-16.3-22.78V294.11a.44.44 0 00-.09-.13L23.26 97.54A30 30 0 0146.05 48H466a30 30 0 0122.79 49.54L320.09 294a.77.77 0 00-.09.13V440a23.93 23.93 0 01-24 24z" />
           </svg>
         </div>
+
+        <div
+          className="sortContainer"
+          style={{ display: sortBox ? "block" : "none" }}
+        >
+          <ul>
+            <li
+              onClick={() => {
+                setSort("all");
+                setSortBox(false);
+              }}
+            >
+              All
+            </li>
+            <li
+              onClick={() => {
+                setSort("completed");
+                setSortBox(false);
+              }}
+            >
+              Completed
+            </li>
+            <li
+              onClick={() => {
+                setSort("uncompleted");
+                setSortBox(false);
+              }}
+            >
+              Uncompleted
+            </li>
+          </ul>
+        </div>
       </form>
       <div className="list-field">
         <div className="list">
           <table>
             <tbody>
-              {tasks.map((task) => {
+              {tasks.map((task, index) => {
                 return (
                   <>
                     <Todo
                       task={task}
+                      key={index}
                       del={delTask}
                       updateTaskFalse={updateTaskFalse}
                       updateTaskTrue={updateTaskTrue}
+                      ind={index}
                     />
                   </>
                 );

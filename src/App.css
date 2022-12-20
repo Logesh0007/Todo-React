@@ -82,6 +82,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .ip-todo {
@@ -166,7 +167,7 @@ body {
 }
 
 .list-field {
-  width: 35vw;
+  width: 40vw;
   height: 60vh;
   margin: 10vh 0 0 5vw;
   display: flex;
@@ -185,16 +186,16 @@ body {
 }
 
 .list-field .list {
-  width: 30vw;
+  width: 93%;
   height: 45vh;
 }
 
 table {
-  width: 30vw;
+  width: 100%;
 }
 
 tbody {
-  width: 30vw;
+  width: 100%;
   background: linear-gradient(to right, #502e84, #3e1c66);
 }
 
@@ -202,7 +203,7 @@ tr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 30vw;
+  width: 93%;
   height: 7vh;
   background-color: white;
   padding-left: 1vh;
@@ -227,7 +228,7 @@ tr {
 
 .row-task:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 10px 5px rgb(44, 11, 94);
+  /* box-shadow: 0 0 10px 5px rgb(44, 11, 94); */
   transition: transform 300ms;
 }
 
@@ -296,4 +297,40 @@ tr:hover .opt-cont {
 .del:active {
   transform: scale(0.9);
   transition: transform 100ms;
+}
+
+.sortContainer {
+  position: absolute;
+  right: -40px;
+  bottom: -130px;
+  background-color: white;
+  border-radius: 3px;
+  display: none;
+}
+
+.sortContainer ul {
+  list-style-type: none;
+}
+
+.sortContainer ul li {
+  padding: 10px 20px;
+}
+
+.sortContainer ul li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.sno {
+  width: 50px;
+  height: 7vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4f2d83;
 }
